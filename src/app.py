@@ -39,8 +39,12 @@ def get_sql_chain(db):
   prompt = ChatPromptTemplate.from_template(template)
   
   # llm = ChatOpenAI(model="gpt-4-0125-preview")
+  # Asegurarse de que GROQ_API_KEY exista en el entorno
+  if "GROQ_API_KEY" not in os.environ:
+    raise ValueError("GROQ_API_KEY no está definida en las variables de entorno")
+    
   llm = ChatGroq(
-    model="mixtral-8x7b-32768", 
+    model_name="mixtral-8x7b-32768", 
     temperature=0,
     api_key=os.environ["GROQ_API_KEY"]  # Explícitamente pasar la clave API
   )
@@ -71,8 +75,12 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
   prompt = ChatPromptTemplate.from_template(template)
   
   # llm = ChatOpenAI(model="gpt-4-0125-preview")
+  # Asegurarse de que GROQ_API_KEY exista en el entorno
+  if "GROQ_API_KEY" not in os.environ:
+    raise ValueError("GROQ_API_KEY no está definida en las variables de entorno")
+    
   llm = ChatGroq(
-    model="mixtral-8x7b-32768", 
+    model_name="mixtral-8x7b-32768", 
     temperature=0,
     api_key=os.environ["GROQ_API_KEY"]  # Explícitamente pasar la clave API
   )
